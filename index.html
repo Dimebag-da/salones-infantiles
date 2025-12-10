@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salones Infantiles - Fiesta y Diversión</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">🎉 Salones Infantiles 🎈</h1>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Buscar salón...">
+                <i class="fas fa-search"></i>
+            </div>
+            <button id="adminBtn" class="admin-btn">Panel Admin</button>
+            <button onclick="forceShow()" style="background: red; color: white; margin-left: 10px; padding: 10px;">
+    🔧 Mostrar Salones
+</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div id="salonesContainer" class="salones-grid">
+                <!-- Los salones se cargarán aquí dinámicamente -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal para comentarios -->
+    <div id="commentsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalContent">
+                <!-- Contenido del modal se cargará aquí -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel de Admin -->
+    <div id="adminPanel" class="admin-panel">
+        <div class="admin-header">
+            <h2>Panel de Administración</h2>
+            <button id="closeAdminBtn" class="close-admin-btn">Cerrar</button>
+        </div>
+        <div class="admin-content">
+            <div class="admin-actions">
+                <button id="addSalonBtn" class="btn-primary">Agregar Salón</button>
+                <button id="refreshDataBtn" class="btn-secondary">Actualizar Datos</button>
+                <button id="resetDataBtn" class="btn-danger">Restablecer Datos</button>
+            </div>
+            <div id="adminSalonesList" class="admin-salones-list">
+                <!-- Lista de salones para administración -->
+            </div>
+        </div>
+    </div>
+
+<!-- Scripts - ORDEN CORRECTO -->
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+<!-- Configuración Firebase -->
+<script src="js/firebase-config.js"></script>
+
+<!-- Database con Firebase -->
+<script src="js/database-firebase.js"></script>
+
+<!-- ✅✅✅ AGREGAR SISTEMA DE SEGURIDAD (NUEVO) -->
+<script src="js/security.js"></script>
+
+<!-- Conector para comentarios -->
+<script src="js/database-connector.js"></script>
+
+<!-- Sistema de comentarios -->
+<script src="js/comments.js"></script>
+
+<!-- Funciones esenciales para admin -->
+<script src="js/admin-essentials.js"></script>
+
+<!-- Panel de administración -->
+<script src="js/admin.js"></script>
+
+<!-- Funcionalidad principal -->
+<script src="js/main.js"></script>

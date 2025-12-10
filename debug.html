@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Simple</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        button { margin: 5px; padding: 10px; }
+        #result { margin-top: 20px; padding: 10px; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <h1>Debug Firebase</h1>
+    <button onclick="testFirebase()">Test Firebase</button>
+    <button onclick="loadSalones()">Load Salones</button>
+    <button onclick="resetData()">Reset Data</button>
+    <div id="result">Esperando...</div>
+
+    <!-- Solo lo esencial -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/database-firebase.js"></script>
+
+    <script>
+        async function testFirebase() {
+            const result = document.getElementById('result');
+            result.innerHTML = 'Probando...';
+            
+            try {
+                await appDatabase.waitForInit();
+                result.innerHTML += '<br>✅ Firebase inicializado';
+                result.innerHTML += '<br>✅ DB: ' + (appDatabase.db ? 'OK' : 'NO');
+            } catch (error) {
+                result.innerHTML += '<br>❌ Error: ' + error.message;
+            }
+        }
+        
+        async function loadSalones() {
+            const result = document.getElementById('result');
+            result.innerHTML = 'Cargando salones...';
+            
+            try {
+                const salones = await appDatabase.getAllSalones();
+                result.innerHTML = `✅ ${salones.length} salones cargados`;
+                salones.forEach(s => {
+                    result.innerHTML += `<br>• ${s.name}`;
+                });
+            } catch (error) {
+                result.innerHTML = '❌ Error: ' + error.message;
+            }
+        }
+        
+        async function resetData() {
+            if (confirm('¿Resetear a datos de ejemplo?')) {
+                const result = document.getElementById('result');
+                result.innerHTML = 'Reseteando...';
+                const success = await appDatabase.resetToSampleData();
+                result.innerHTML = success ? '✅ Datos reseteados' : '❌ Error';
+            }
+        }
+    </script>
+</body>
+</html>
